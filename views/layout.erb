@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+
+    <title>Cocoa Brewer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/css/bootstrap-tagsinput.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+    .ui-autocomplete-loading {
+      background: white url('/ui-anim_basic_16x16.gif') right center no-repeat;
+    }
+    .bootstrap-tagsinput input{
+      display: none;
+    }
+    
+    .bootstrap-tagsinput{
+      border: none !important;
+      box-shadow: none !important;
+    }
+    
+    </style>
+
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="mailto:luka.bratos@gmail.com">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Cocoa Brewer</h3>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-sm-12">
+
+          <form id="brew_it" class="form-horizontal" role="form" action="/" method="POST">
+            <input type="hidden" class="form-control" id="pods_items" name="checkboxes[]">
+            <div class="form-group">
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="pods" placeholder="Type pod">
+              </div>
+              <div class="col-sm-2">
+                <button id="brew" type="button" class="btn btn-default">Brew</button>
+              </div>
+            </div>
+          </form>
+
+          <br /><br />
+
+          <input id="tags" type="text" value="" />
+
+          <br /><br />
+
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>&copy; Cocoa Brewer 2014</p>
+          </div>
+          <div class="col-sm-6 text-right">
+            <p>Powered by <a href="http://blog.cocoapods.org/Search-API-Version-1/" target="_blank">CocoaPods API</a></p/>
+          </div>          
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    
+    <script src="/js/bootstrap-tagsinput.min.js"></script>
+    <script>
+    $(function() {
+      
+      $('#brew').click(function(){
+        $('#pods_items').val($("#tags").tagsinput('items'));
+        $('#brew_it').submit();
+      });      
+
+      $('#tags').tagsinput({
+          freeInput: true
+      });
+
+      function log( message ) {
+        $('#tags').tagsinput('add', message);
+      }
+
+      $("#pods").autocomplete ({
+        source: function( request, response ) {
+          $.ajax({
+            headers: {          
+              Accept : "application/vnd.cocoapods.org+flat.ids.json", 
+            },
+            url: "http://search.cocoapods.org/api/pods",
+            dataType: "json",
+            data: {
+              amount: 10,
+              query: request.term
+            },
+            success: function( data ) {
+              response(
+                $.each(data, function( index, value ) {
+                  return {
+                    label: index,
+                    value: value
+                  }
+                })
+              );
+            }
+          });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+          log( ui.item ? ui.item.label : "Nothing selected, input was " + this.value);
+          this.value = '';
+          return false;
+        },
+        open: function() {
+          $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
