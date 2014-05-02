@@ -13,7 +13,7 @@ post '/' do
 		content << "pod '" + pod + "'\n"
 	end
 	
-	podfile = "Podfile"
-	File.open(podfile, "w"){ |f| f << content }
+	podfile = "Podfile" +  Time.now.to_i.to_s
+	File.open('/tmp/' + podfile, "w"){ |f| f << content }
 	send_file(podfile, :filename => "Podfile")
 end
