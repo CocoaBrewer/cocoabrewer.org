@@ -19,7 +19,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <link href="/css/bootstrap-tagsinput.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -30,71 +30,74 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <style>
-    .ui-autocomplete-loading {
-      background: white url('/ui-anim_basic_16x16.gif') right center no-repeat;
-    }
-    .bootstrap-tagsinput input{
-      display: none;
-    }
-    
-    .bootstrap-tagsinput{
-      border: none !important;
-      box-shadow: none !important;
-    }
-    
-    </style>
-
-
   </head>
 
   <body>
 
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="mailto:luka.bratos@gmail.com">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">Cocoa Brewer</h3>
-      </div>
+		<div class="site-wrapper">
+    		<div class="site-wrapper-inner">
+        		<div class="cover-container">
+          			<div class="header clearfix">
+            				<div class="inner">
+												<div class="row">
+                    				<div class="col-sm-4"></div>
+                    
+														<div class="col-sm-4">
+                     						<img id="logo" src="img/logo.png"></img>
+                    				</div>
+	
+                    				<div class="col-sm-4 text-right">
+                    		</div>          
+                		</div>
+            		</div>
+          	</div>
 
-      <div class="row marketing">
-        <div class="col-sm-12">
+					<div class="clear"></div>
 
-          <form id="brew_it" class="form-horizontal" role="form" action="/" method="POST">
-            <input type="hidden" class="form-control" id="pods_items" name="checkboxes[]">
-            <div class="form-group">
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="pods" placeholder="Type pod">
-              </div>
-              <div class="col-sm-2">
-                <button id="brew" type="button" class="btn btn-default">Brew</button>
-              </div>
-            </div>
-          </form>
+          <div class="inner cover">
+						 <form id="brew_it" class="form-horizontal" role="form" action="/" method="POST">
+								<input type="hidden" class="form-control" id="pods_items" name="checkboxes[]">
+		            <div class="form-group">
+										 <label class="label" for="pods"></label>
+		                 <input type="text" class="form-control" id="pods" onfocus="this.placeholder = ''" placeholder="Search for Cocoa pods">
+		            </div>
+						  </form>
 
-          <br /><br />
+							<div id="tagsDiv">
+								<input id="tags" type="text" value="" />
+							</div>
+						
+							<div class="clear"></div>
 
-          <input id="tags" type="text" value="" />
-
-          <br /><br />
-
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="row">
-          <div class="col-sm-6">
-            <p>&copy; Cocoa Brewer 2014</p>
+							<div id="custom_button">
+								<button id="brew" class="btn btn-default" type="button">BREW</button>
+							</div>
+							
           </div>
-          <div class="col-sm-6 text-right">
-            <p>Powered by <a href="http://blog.cocoapods.org/Search-API-Version-1/" target="_blank">CocoaPods API</a></p/>
-          </div>          
+ 
+          <div class="footer">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-sm-4">
+                      <p>&copy; Cocoa Brewer 2014</p>
+                    </div>
+
+                    <div class="col-sm-1">
+                      <a href=" https://github.com/CocoaBrewer/cocoabrewer.org" target="_blank"><img id= "ghLogo" src="img/ghLogo.png"></img></a>
+                    </div>
+
+                    <div class="col-sm-4 text-right">
+                      <p>Powered by <a href="http://blog.cocoapods.org/Search-API-Version-1/" target="_blank">CocoaPods API</a></p/>
+                    </div>          
+                </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
 
-    </div> <!-- /container -->
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -102,20 +105,23 @@
 
     
     <script src="/js/bootstrap-tagsinput.min.js"></script>
+		<script src="/js/typeahead.bundle.js"></script>
     <script>
     $(function() {
       
-      $('#brew').click(function(){
-        $('#pods_items').val($("#tags").tagsinput('items'));
-        $('#brew_it').submit();
+      $("#brew").click(function(){
+        $("#pods_items").val($("#tags").tagsinput('items'));
+        $("#brew_it").submit();
+				$("#tags").tagsinput('removeAll');
       });      
 
-      $('#tags').tagsinput({
-          freeInput: true
+      $("#tags").tagsinput({
+				freeInput: true,
+				placeholderColor: '#55c8f3'
       });
 
       function log( message ) {
-        $('#tags').tagsinput('add', message);
+        $("#tags").tagsinput('add', message);
       }
 
       $("#pods").autocomplete ({

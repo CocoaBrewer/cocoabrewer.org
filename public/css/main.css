@@ -1,0 +1,136 @@
+html,
+body {
+  height: 100%;
+  background-color: #fff;
+}
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inner {
+  padding: 30px;
+  text-align:center;
+}
+
+.clear{
+	clear:both;
+}
+
+.form-grouplabel {
+	font-size: 1.4em; !important
+}
+
+.form-control{
+	text-align: center;
+	font-size: 1.4em
+}
+
+.inner #custom_button{
+	margin: 30px;
+	padding: 40px;
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #55c8f3;
+	font-size: 1.4em;
+  background-color: #fff;
+  border: 3px solid #60c3e3;
+	width: 180px;
+	-webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+.clear {
+	clear:both;
+}
+
+.ui-autocomplete-loading {
+	background: white url('/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+.bootstrap-tagsinput input{
+	display: none;
+}
+  
+.bootstrap-tagsinput{
+	border: none !important;
+	box-shadow: none !important;
+}
+    
+.cover {
+  padding: 0 20px;
+}
+
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.form-group input  {
+  outline: none;
+  border-top:none !important;
+	border-left:none !important;
+	border-right:none !important;
+  box-shadow:none !important;
+	-webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+.tag label label-info{
+	margin : 20px;
+	padding : 20px;
+	height: 100px;
+	width: 300px;
+}
+
+.footer {
+	color: #000;
+}
+
+
+@media (min-width: 768px) {
+  .header {
+    position: fixed;
+    top: 0;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+		left:50%;
+    margin-left:-270px;
+    width:400px;
+    height:100px;
+  }
+
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  .header,
+  .footer,
+  .cover-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .header,
+  .footer,
+  .cover-container {
+    width: 700px;
+  }
+}
