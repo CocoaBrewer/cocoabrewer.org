@@ -8,9 +8,11 @@ post '/' do
 	data = params[:checkboxes]
 	data = data[0].split(',')
 	content = ""
-
+	
 	data.each do |pod|
-		content << "pod '" + pod + "'\n"
+		title, version = pod.split(' ')
+		major, minor = version.split('.')
+		content << "pod '" + title + "', '~> " + major + "." + minor + "'\n"
 	end
 	
 	podfile = "/tmp/Podfile" +  Time.now.to_i.to_s
