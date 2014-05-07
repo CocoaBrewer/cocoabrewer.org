@@ -129,7 +129,7 @@
         source: function( request, response ) {
           $.ajax({
             headers: {          
-              Accept : "application/vnd.cocoapods.org+flat.ids.json", 
+              Accept : "application/vnd.cocoapods.org+flat.hash.json", 
             },
             url: "http://search.cocoapods.org/api/pods",
             dataType: "json",
@@ -139,11 +139,8 @@
             },
             success: function( data ) {
               response(
-                $.each(data, function( index, value ) {
-                  return {
-                    label: index,
-                    value: value
-                  }
+                $.map(data, function( items ) {
+                  return items.id + ' ' + items.version;
                 })
               );
             }
