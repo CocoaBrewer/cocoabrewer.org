@@ -1,11 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    httparty (0.11.0)
-      multi_json (~> 1.0)
-      multi_xml (>= 0.5.2)
-    multi_json (1.8.0)
-    multi_xml (0.5.5)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -19,5 +14,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  httparty
   sinatra
